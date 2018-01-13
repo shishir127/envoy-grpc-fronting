@@ -1,0 +1,5 @@
+FROM golang:1.8
+
+RUN mkdir -p $GOPATH/src/github.com/shishir127/golang-grpc-server && git clone https://github.com/shishir127/golang-grpc-server.git $GOPATH/src/github.com/shishir127/golang-grpc-server && go get -u google.golang.org/grpc
+RUN cd $GOPATH/src/github.com/shishir127/golang-grpc-server && make build
+CMD nohup $GOPATH/src/github.com/shishir127/out/grpc-server
