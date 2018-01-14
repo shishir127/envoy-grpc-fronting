@@ -6,14 +6,15 @@ services:
       dockerfile: Dockerfile-fronting
     volumes:
       - ./front-envoy.yaml:/etc/front-envoy.yaml
+      - ./front-envoy.json:/etc/front-envoy.json
     networks:
       - envoymesh
     expose:
       - "80"
       - "8001"
     ports:
-      - "8000:80"
-      - "8001:8001"
+      - "50001:80"
+      - "3001:8001"
 
   server1:
     build:
@@ -27,8 +28,11 @@ services:
             - service1
     environment:
       - SERVICE_NAME=1
+      - PORT=80
     expose:
       - "80"
+    ports:
+      - "3002:80"
 
   server2:
     build:
@@ -42,7 +46,10 @@ services:
             - service2
     environment:
       - SERVICE_NAME=2
+      - PORT=80
     expose:
       - "80"
+    ports:
+      - "3003:80"
 networks:
   envoymesh: {}

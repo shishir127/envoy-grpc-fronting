@@ -29,24 +29,24 @@ static_resources:
           - name: envoy.router
             config: {}
   clusters:
-  - name: service1
-    connect_timeout: 0.25s
-    type: strict_dns
-    lb_policy: round_robin
-    http2_protocol_options: {}
-    hosts:
-    - socket_address:
-        address: service1
-        port_value: 80
-  - name: service2
-    connect_timeout: 0.25s
-    type: strict_dns
-    lb_policy: round_robin
-    http2_protocol_options: {}
-    hosts:
-    - socket_address:
-        address: service2
-        port_value: 80
+    - name: service1
+      connect_timeout: 0.25s
+      type: static
+      lb_policy: least_request
+      features: http2
+      hosts:
+      - socket_address:
+          address: service1
+          port_value: 80
+    - name: service2
+      connect_timeout: 0.25s
+      type: static
+      lb_policy: least_request
+      features: htt2
+      hosts:
+      - socket_address:
+          address: service2
+          port_value: 80
 admin:
   access_log_path: "/dev/null"
   address:
