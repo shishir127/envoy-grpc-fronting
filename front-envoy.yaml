@@ -15,9 +15,9 @@ static_resources:
             - name: local_service
               domains: ["*"]
               routes:
-              - match: { prefix: "/s1" }
+              - match: { prefix: "/" }
                 route: { cluster: service1 }
-              - match: { prefix: "/s2" }
+              - match: { prefix: "/" }
                 route: { cluster: service2 }
           http_filters:
           - name: envoy.router
@@ -38,4 +38,4 @@ static_resources:
 
 admin:
   access_log_path: /tmp/admin_access.log
-  address: { socket_address: { address: "127.0.0.1", port_value: 8001 } }
+  address: { socket_address: { address: "0.0.0.0", port_value: 8001 } }
