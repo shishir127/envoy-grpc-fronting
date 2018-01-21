@@ -6,14 +6,15 @@ services:
       dockerfile: Dockerfile-fronting
     volumes:
       - ./front-envoy.yaml:/etc/front-envoy.yaml
-      - ./front-envoy.json:/etc/front-envoy.json
+      - ./private.pem:/certs/test.key
+      - ./public.pem:/certs/test.crt
     networks:
       - envoymesh
     expose:
-      - "80"
+      - "443"
       - "8001"
     ports:
-      - "50001:80"
+      - "443:443"
       - "8001:8001"
 
   server1:
